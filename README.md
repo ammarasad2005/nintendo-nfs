@@ -36,10 +36,12 @@ A high-graphics, feature-rich classic Need for Speed game reimagined in Nintendo
 - 📅 Target Release: Q4 2025
 
 ## 🔧 Technology Stack
-- Game Engine: [TBD]
-- Programming Language: [TBD]
-- Graphics: Custom pixel art assets
-- Sound: Original 8-bit style compositions
+- Game Engine: Vanilla JavaScript with Canvas API
+- Programming Language: JavaScript (ES6+)
+- Build Tool: Webpack 5
+- Graphics: Custom pixel art assets with 2D Canvas rendering
+- Sound: Howler.js for audio management
+- Physics: Custom physics engine
 
 ## 📥 Installation
 ```bash
