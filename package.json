@@ -1,0 +1,26 @@
+{
+  "name": "nintendo-nfs",
+  "version": "1.0.0",
+  "description": "A high-graphics, feature-rich classic Need for Speed game reimagined in Nintendo's iconic style",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "game",
+    "racing",
+    "nintendo",
+    "nfs",
+    "pixel-art",
+    "javascript"
+  ],
+  "author": "ammarasad2005",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

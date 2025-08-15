@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nintendo NFS - Sprite System Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #ffcc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        .demo-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #ffcc00;
+        }
+
+        .demo-canvas {
+            border: 2px solid #fff;
+            background: #000;
+            display: block;
+            margin: 20px auto;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: #ffcc00;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: #666;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        .log {
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 5px;
+            height: 200px;
+            overflow-y: auto;
+            font-size: 12px;
+            border: 1px solid #333;
+        }
+
+        .log-entry {
+            margin: 5px 0;
+            padding: 2px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .log-info { color: #00ff00; }
+        .log-warn { color: #ffaa00; }
+        .log-error { color: #ff4444; }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffcc00, #ffd700);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .pixel-text {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏎️ Nintendo NFS Sprite System</h1>
+            <p class="pixel-text">Comprehensive Asset Management & Animation Demo</p>
+        </div>
+
+        <div class="demo-section">
+            <h2>🎮 Interactive Demo</h2>
+            <canvas id="demoCanvas" class="demo-canvas" width="800" height="400"></canvas>
+            
+            <div class="controls">
+                <button class="btn" id="initBtn">Initialize System</button>
+                <button class="btn" id="loadAssetsBtn" disabled>Load Sample Assets</button>
+                <button class="btn" id="playAnimBtn" disabled>Play Animation</button>
+                <button class="btn" id="pauseAnimBtn" disabled>Pause</button>
+                <button class="btn" id="stopAnimBtn" disabled>Stop</button>
+                <button class="btn" id="memoryOptBtn" disabled>Optimize Memory</button>
+            </div>
+
+            <div id="loadingSection" class="loading" style="display: none;">
+                <h3>Loading Assets...</h3>
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <p id="loadingText">Initializing...</p>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>📊 System Statistics</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="memoryUsage">0 MB</div>
+                    <div>Memory Usage</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="loadedAssets">0</div>
+                    <div>Loaded Assets</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="spriteSheets">0</div>
+                    <div>Sprite Sheets</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="activeAnimations">0</div>
+                    <div>Active Animations</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>📝 System Log</h2>
+            <div id="systemLog" class="log">
+                <div class="log-entry log-info">System initialized and ready for demo...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include sprite system components -->
+    <script src="src/assets/managers/AssetManager.js"></script>
+    <script src="src/assets/sprites/SpriteSheet.js"></script>
+    <script src="src/assets/sprites/SpriteAnimation.js"></script>
+    <script src="src/index.js"></script>
+
+    <script>
+        // Demo application
+        class NintendoNFSDemo {
+            constructor() {
+                this.spriteSystem = null;
+                this.canvas = document.getElementById('demoCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.isRunning = false;
+                this.lastTime = 0;
+                
+                // Sample sprite data for demo (since we don't have actual sprite files)
+                this.sampleSpriteData = this.createSampleSpriteData();
+                
+                this.setupEventListeners();
+                this.setupCanvas();
+                this.log('Demo initialized', 'info');
+            }
+
+            setupCanvas() {
+                // Pixel perfect rendering
+                this.ctx.imageSmoothingEnabled = false;
+                this.ctx.webkitImageSmoothingEnabled = false;
+                this.ctx.mozImageSmoothingEnabled = false;
+                this.ctx.msImageSmoothingEnabled = false;
+            }
+
+            setupEventListeners() {
+                document.getElementById('initBtn').addEventListener('click', () => this.initializeSystem());
+                document.getElementById('loadAssetsBtn').addEventListener('click', () => this.loadSampleAssets());
+                document.getElementById('playAnimBtn').addEventListener('click', () => this.playAnimation());
+                document.getElementById('pauseAnimBtn').addEventListener('click', () => this.pauseAnimation());
+                document.getElementById('stopAnimBtn').addEventListener('click', () => this.stopAnimation());
+                document.getElementById('memoryOptBtn').addEventListener('click', () => this.optimizeMemory());
+            }
+
+            async initializeSystem() {
+                try {
+                    this.log('Initializing Nintendo NFS Sprite System...', 'info');
+                    
+                    this.spriteSystem = new NintendoNFSSpriteSystem({
+                        debugMode: true,
+                        preloadAssets: false // We'll load manually for demo
+                    });
+
+                    await this.spriteSystem.initialize();
+                    
+                    this.log('Sprite system initialized successfully!', 'info');
+                    this.updateUI();
+                    this.enableButton('loadAssetsBtn');
+                    this.disableButton('initBtn');
+                } catch (error) {
+                    this.log(`Initialization failed: ${error.message}`, 'error');
+                }
+            }
+
+            async loadSampleAssets() {
+                try {
+                    this.showLoading('Loading sample assets...');
+                    this.log('Loading sample sprite assets...', 'info');
+
+                    // Create sample assets in memory
+                    const sampleAssets = this.createSampleAssets();
+                    
+                    // Simulate loading progress
+                    for (let i = 0; i <= 100; i += 10) {
+                        this.updateProgress(i, `Loading assets... ${i}%`);
+                        await this.delay(100);
+                    }
+
+                    // Load the sample assets
+                    await this.loadSampleSprites(sampleAssets);
+                    
+                    this.hideLoading();
+                    this.log('Sample assets loaded successfully!', 'info');
+                    this.updateUI();
+                    this.enableButton('playAnimBtn');
+                    this.enableButton('memoryOptBtn');
+                    this.disableButton('loadAssetsBtn');
+                    
+                    this.startRenderLoop();
+                } catch (error) {
+                    this.hideLoading();
+                    this.log(`Asset loading failed: ${error.message}`, 'error');
+                }
+            }
+
+            async loadSampleSprites(assets) {
+                // Create a sample car sprite sheet
+                const carSheet = this.createSampleCarSpriteSheet();
+                
+                // Manually add to sprite system (simulating loaded assets)
+                this.spriteSystem.spriteSheet.spriteSheets.set('sample_car', {
+                    id: 'sample_car',
+                    image: carSheet.image,
+                    frames: carSheet.frames,
+                    animations: carSheet.animations,
+                    meta: {}
+                });
+
+                // Create animation for the car
+                const carAnimation = this.spriteSystem.createAnimation('demo_car', 'sample_car');
+                carAnimation.createAnimation('idle', 'sample_car', ['frame_0'], {
+                    loop: true,
+                    duration: 1000
+                });
+                
+                carAnimation.createAnimation('moving', 'sample_car', ['frame_0', 'frame_1'], {
+                    loop: true,
+                    duration: 500
+                });
+
+                this.log('Sample car sprite and animations created', 'info');
+            }
+
+            createSampleCarSpriteSheet() {
+                // Create a simple colored rectangle as sample car sprite
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = 128;
+                canvas.height = 64;
+
+                // Draw sample car frames
+                ctx.fillStyle = '#ff4444';
+                ctx.fillRect(0, 0, 64, 32); // Frame 0
+                
+                ctx.fillStyle = '#4444ff';
+                ctx.fillRect(64, 0, 64, 32); // Frame 1
+
+                return {
+                    image: canvas,
+                    frames: {
+                        'frame_0': { x: 0, y: 0, width: 64, height: 32 },
+                        'frame_1': { x: 64, y: 0, width: 64, height: 32 }
+                    },
+                    animations: {}
+                };
+            }
+
+            createSampleAssets() {
+                return [
+                    { path: 'sample/car.json', type: 'spritesheet', id: 'sample_car' }
+                ];
+            }
+
+            createSampleSpriteData() {
+                return {
+                    frames: {
+                        'car_idle': { frame: { x: 0, y: 0, w: 64, h: 32 } },
+                        'car_move': { frame: { x: 64, y: 0, w: 64, h: 32 } }
+                    },
+                    meta: {
+                        app: "Nintendo NFS Demo",
+                        version: "1.0",
+                        format: "RGBA8888",
+                        size: { w: 128, h: 64 }
+                    }
+                };
+            }
+
+            playAnimation() {
+                if (this.spriteSystem) {
+                    const animation = this.spriteSystem.getAnimation('demo_car');
+                    if (animation) {
+                        animation.play('moving');
+                        this.log('Animation started: moving', 'info');
+                        this.enableButton('pauseAnimBtn');
+                        this.enableButton('stopAnimBtn');
+                    }
+                }
+            }
+
+            pauseAnimation() {
+                if (this.spriteSystem) {
+                    const animation = this.spriteSystem.getAnimation('demo_car');
+                    if (animation) {
+                        animation.pause();
+                        this.log('Animation paused', 'info');
+                    }
+                }
+            }
+
+            stopAnimation() {
+                if (this.spriteSystem) {
+                    const animation = this.spriteSystem.getAnimation('demo_car');
+                    if (animation) {
+                        animation.stop();
+                        this.log('Animation stopped', 'info');
+                        this.disableButton('pauseAnimBtn');
+                        this.disableButton('stopAnimBtn');
+                    }
+                }
+            }
+
+            optimizeMemory() {
+                if (this.spriteSystem) {
+                    this.spriteSystem.assetManager.optimizeMemory();
+                    this.log('Memory optimization performed', 'info');
+                    this.updateUI();
+                }
+            }
+
+            startRenderLoop() {
+                this.isRunning = true;
+                this.render();
+            }
+
+            render(currentTime = 0) {
+                if (!this.isRunning) return;
+
+                const deltaTime = currentTime - this.lastTime;
+                this.lastTime = currentTime;
+
+                // Clear canvas
+                this.ctx.fillStyle = '#001122';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                // Update animations
+                if (this.spriteSystem) {
+                    this.spriteSystem.updateAnimations(deltaTime);
+
+                    // Render demo car
+                    const carAnimation = this.spriteSystem.getAnimation('demo_car');
+                    if (carAnimation) {
+                        carAnimation.render(this.ctx, 350, 180, { scale: 4 });
+                    }
+                }
+
+                // Draw demo info
+                this.drawDemoInfo();
+
+                requestAnimationFrame((time) => this.render(time));
+            }
+
+            drawDemoInfo() {
+                this.ctx.fillStyle = '#ffcc00';
+                this.ctx.font = '16px Courier New';
+                this.ctx.fillText('Nintendo NFS Sprite System Demo', 20, 30);
+                
+                this.ctx.fillStyle = '#ffffff';
+                this.ctx.font = '12px Courier New';
+                this.ctx.fillText('Sample car sprite with animation system', 20, 50);
+                
+                if (this.spriteSystem) {
+                    const stats = this.spriteSystem.getStats();
+                    this.ctx.fillText(`Active Animations: ${stats.activeAnimations}`, 20, 370);
+                    this.ctx.fillText(`Loaded Sprites: ${stats.loadedSpriteSheets}`, 20, 385);
+                }
+            }
+
+            updateUI() {
+                if (this.spriteSystem) {
+                    const stats = this.spriteSystem.getStats();
+                    
+                    document.getElementById('memoryUsage').textContent = 
+                        `${(stats.memoryUsage.currentUsage / (1024 * 1024)).toFixed(2)} MB`;
+                    document.getElementById('loadedAssets').textContent = stats.loadedAssets;
+                    document.getElementById('spriteSheets').textContent = stats.loadedSpriteSheets;
+                    document.getElementById('activeAnimations').textContent = stats.activeAnimations;
+                }
+            }
+
+            showLoading(text) {
+                document.getElementById('loadingSection').style.display = 'block';
+                document.getElementById('loadingText').textContent = text;
+            }
+
+            hideLoading() {
+                document.getElementById('loadingSection').style.display = 'none';
+            }
+
+            updateProgress(percent, text) {
+                document.getElementById('progressFill').style.width = `${percent}%`;
+                document.getElementById('loadingText').textContent = text;
+            }
+
+            enableButton(id) {
+                document.getElementById(id).disabled = false;
+            }
+
+            disableButton(id) {
+                document.getElementById(id).disabled = true;
+            }
+
+            log(message, type = 'info') {
+                const logElement = document.getElementById('systemLog');
+                const entry = document.createElement('div');
+                entry.className = `log-entry log-${type}`;
+                entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+                
+                logElement.appendChild(entry);
+                logElement.scrollTop = logElement.scrollHeight;
+                
+                console.log(`[Nintendo NFS] ${message}`);
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        // Initialize demo when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new NintendoNFSDemo();
+        });
+    </script>
+</body>
+</html>
