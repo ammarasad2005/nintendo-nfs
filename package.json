@@ -1,0 +1,37 @@
+{
+  "name": "nintendo-nfs",
+  "version": "1.0.0",
+  "description": "Nintendo-style Need for Speed racing game with comprehensive performance optimization",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --inspect src/index.js",
+    "test": "node src/tests/test-runner.js",
+    "lint": "eslint src/**/*.js",
+    "performance-test": "node src/tests/performance-test.js"
+  },
+  "keywords": [
+    "game",
+    "racing",
+    "nintendo",
+    "need-for-speed",
+    "performance",
+    "optimization",
+    "javascript"
+  ],
+  "author": "ammarasad2005",
+  "license": "MIT",
+  "dependencies": {
+    "performance-now": "^2.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ammarasad2005/nintendo-nfs.git"
+  }
+}
