@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Game data files (these contain player progress and should not be committed)
+data/
+*.json
+!package.json
+
+# Logs
+logs
+*.log
+log/
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Temporary files
+tmp/
+temp/
+.tmp
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Build output
+dist/
+build/
