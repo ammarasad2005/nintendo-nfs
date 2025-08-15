@@ -1,0 +1,32 @@
+{
+  "name": "nintendo-nfs",
+  "version": "1.0.0",
+  "description": "A high-graphics, feature-rich classic Need for Speed game reimagined in Nintendo's iconic style",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js",
+    "test": "node tests/audio-test.js"
+  },
+  "keywords": [
+    "nintendo",
+    "need-for-speed",
+    "racing",
+    "game",
+    "retro",
+    "8-bit",
+    "audio"
+  ],
+  "author": "ammarasad2005",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ammarasad2005/nintendo-nfs.git"
+  }
+}

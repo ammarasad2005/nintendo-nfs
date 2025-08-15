@@ -27,19 +27,23 @@ A high-graphics, feature-rich classic Need for Speed game reimagined in Nintendo
 - **Achievements**: Unlock rewards and special content
 
 ### 🎵 Audio
-- Retro-style background music
-- Dynamic sound effects
-- Immersive racing atmosphere
+- **Comprehensive Audio System**: Full-featured audio management with Nintendo-style processing
+- **Dynamic Background Music**: Seamless track transitions and loop point management
+- **Spatial Sound Effects**: 3D positioned audio with priority-based management
+- **Audio Mixing**: Real-time effects processing and channel management
+- **Performance Optimized**: Audio pooling and efficient resource management
+- **Retro Sound Processing**: Authentic Nintendo-style audio filters and compression
 
 ## 🎯 Project Status
 - 🚧 Currently in development
 - 📅 Target Release: Q4 2025
 
 ## 🔧 Technology Stack
-- Game Engine: [TBD]
-- Programming Language: [TBD]
+- Game Engine: Web-based (HTML5/JavaScript)
+- Programming Language: JavaScript (ES6+)
+- Audio System: Web Audio API with custom Nintendo-style processing
 - Graphics: Custom pixel art assets
-- Sound: Original 8-bit style compositions
+- Sound: Original 8-bit style compositions with dynamic mixing
 
 ## 📥 Installation
 ```bash
@@ -54,7 +58,24 @@ npm install
 
 # Run the game
 npm start
+
+# Test the audio system
+npm test
+
+# View audio demo in browser
+open demo.html
 ```
+
+## 🎵 Audio System
+
+The game features a comprehensive audio management system designed specifically for Nintendo-style gaming:
+
+- **AudioManager**: Central coordinator for all audio operations
+- **BackgroundMusic**: Seamless music playback with crossfading
+- **SoundEffects**: Spatial audio with performance optimization  
+- **AudioMixer**: Real-time audio processing and effects
+
+For detailed audio system documentation, see [AUDIO_README.md](AUDIO_README.md).
 
 ## 🕹️ How to Play
 1. Select your preferred game mode
