@@ -6,7 +6,7 @@
 // Import components (for Node.js environment)
 let AssetManager, SpriteSheet, SpriteAnimation;
 
-if (typeof require !== 'undefined') {
+if (typeof module !== 'undefined' && module.exports) {
     AssetManager = require('./assets/managers/AssetManager');
     SpriteSheet = require('./assets/sprites/SpriteSheet');
     SpriteAnimation = require('./assets/sprites/SpriteAnimation');
@@ -27,7 +27,7 @@ class NintendoNFSSpriteSystem {
         this.config = {
             pixelPerfect: options.pixelPerfect !== false,
             memoryLimit: options.memoryLimit || 100 * 1024 * 1024, // 100MB
-            preloadAssets: options.preloadAssets || true,
+            preloadAssets: options.preloadAssets !== undefined ? options.preloadAssets : true,
             debugMode: options.debugMode || false
         };
 
