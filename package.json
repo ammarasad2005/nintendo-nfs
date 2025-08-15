@@ -1,0 +1,23 @@
+{
+  "name": "nintendo-nfs",
+  "version": "1.0.0",
+  "description": "A Nintendo-style Need for Speed racing game with retro pixel art graphics",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"No tests specified yet\" && exit 0"
+  },
+  "keywords": [
+    "game",
+    "racing",
+    "nintendo",
+    "javascript",
+    "particles",
+    "retro"
+  ],
+  "author": "ammarasad2005",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
