@@ -1,0 +1,121 @@
+{
+  "performance": {
+    "targetFPS": 60,
+    "adaptiveQuality": true,
+    "enableProfiling": true,
+    "enableDebugTools": false,
+    "memoryThreshold": 104857600,
+    "frameTimeThreshold": 16.67
+  },
+  "rendering": {
+    "enableBatching": true,
+    "enableFrustumCulling": true,
+    "enableOcclusionCulling": true,
+    "enableLOD": true,
+    "maxParticles": 10000,
+    "shadowMapSize": 1024,
+    "enableInstancing": true,
+    "renderScale": 1.0,
+    "particleDensity": 1.0,
+    "shadowQuality": "high",
+    "lodDistance": 1.0
+  },
+  "memory": {
+    "enableProfiling": true,
+    "enableAutoGC": true,
+    "gcThreshold": 80,
+    "maxCacheSize": 52428800,
+    "poolGrowthFactor": 1.5,
+    "cacheEvictionPolicy": "LRU",
+    "memoryWarningThreshold": 104857600,
+    "memoryCriticalThreshold": 209715200
+  },
+  "resources": {
+    "maxCacheSize": 52428800,
+    "maxTextures": 100,
+    "maxAudioFiles": 50,
+    "preloadDistance": 1000,
+    "unloadDistance": 2000,
+    "compressionEnabled": true,
+    "streamingEnabled": true,
+    "textureQuality": "high"
+  },
+  "qualityPresets": {
+    "low": {
+      "renderScale": 0.5,
+      "particleDensity": 0.3,
+      "shadowQuality": "low",
+      "textureQuality": "low",
+      "effectsQuality": "low",
+      "lodDistance": 0.5,
+      "shadowMapSize": 512,
+      "maxParticles": 3000
+    },
+    "medium": {
+      "renderScale": 0.75,
+      "particleDensity": 0.7,
+      "shadowQuality": "medium",
+      "textureQuality": "medium",
+      "effectsQuality": "medium",
+      "lodDistance": 0.75,
+      "shadowMapSize": 1024,
+      "maxParticles": 7000
+    },
+    "high": {
+      "renderScale": 1.0,
+      "particleDensity": 1.0,
+      "shadowQuality": "high",
+      "textureQuality": "high",
+      "effectsQuality": "high",
+      "lodDistance": 1.0,
+      "shadowMapSize": 2048,
+      "maxParticles": 10000
+    },
+    "ultra": {
+      "renderScale": 1.25,
+      "particleDensity": 1.5,
+      "shadowQuality": "ultra",
+      "textureQuality": "ultra",
+      "effectsQuality": "ultra",
+      "lodDistance": 1.5,
+      "shadowMapSize": 4096,
+      "maxParticles": 15000
+    }
+  },
+  "deviceProfiles": {
+    "mobile": {
+      "defaultQuality": "low",
+      "maxMemory": 67108864,
+      "targetFPS": 30,
+      "enableAdaptiveQuality": true
+    },
+    "desktop": {
+      "defaultQuality": "high",
+      "maxMemory": 209715200,
+      "targetFPS": 60,
+      "enableAdaptiveQuality": true
+    },
+    "console": {
+      "defaultQuality": "high",
+      "maxMemory": 536870912,
+      "targetFPS": 60,
+      "enableAdaptiveQuality": false
+    }
+  },
+  "debug": {
+    "enableConsoleOutput": true,
+    "enableVisualOverlay": false,
+    "metricsUpdateInterval": 1000,
+    "memoryUpdateInterval": 5000,
+    "enableFrameTimeGraph": false,
+    "enableMemoryGraph": false
+  },
+  "nintendo": {
+    "colorPalette": "classic",
+    "pixelArt": true,
+    "retroEffects": true,
+    "chiptune": true,
+    "nintendoStyleUI": true,
+    "classicTransitions": true
+  }
+}
