@@ -1,0 +1,31 @@
+{
+  "name": "nintendo-nfs",
+  "version": "1.0.0",
+  "description": "A Nintendo-styled Need for Speed racing game with retro pixel art graphics",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8080 -o",
+    "dev": "npx http-server -p 8080 -o",
+    "build": "echo 'No build process needed for static HTML5 game'",
+    "test": "echo 'No tests specified yet'"
+  },
+  "keywords": [
+    "game",
+    "racing",
+    "nintendo",
+    "need-for-speed",
+    "pixel-art",
+    "javascript",
+    "html5",
+    "canvas"
+  ],
+  "author": "ammarasad2005",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ammarasad2005/nintendo-nfs.git"
+  }
+}

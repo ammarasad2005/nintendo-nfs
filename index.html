@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nintendo NFS - Racing Game</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="1024" height="768"></canvas>
+        <div id="loadingScreen" class="loading-screen">
+            <div class="loading-text">Loading Nintendo NFS...</div>
+            <div class="loading-bar">
+                <div id="loadingProgress" class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Engine Core -->
+    <script src="js/core/Game.js"></script>
+    <script src="js/core/SceneManager.js"></script>
+    <script src="js/core/InputManager.js"></script>
+    <script src="js/core/AudioManager.js"></script>
+    
+    <!-- Game Scenes -->
+    <script src="js/scenes/IntroScreen.js"></script>
+    <script src="js/scenes/MainMenu.js"></script>
+    <script src="js/scenes/GamePlay.js"></script>
+    <script src="js/scenes/EndScreen.js"></script>
+    
+    <!-- Game Initialization -->
+    <script src="js/main.js"></script>
+</body>
+</html>
