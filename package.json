@@ -1,0 +1,27 @@
+{
+  "name": "nintendo-style-nfs",
+  "version": "1.0.0",
+  "description": "A Nintendo-styled Need for Speed game with comprehensive UI/UX improvements",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8080",
+    "dev": "http-server -p 8080 -o",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "game",
+    "racing",
+    "nintendo",
+    "need-for-speed",
+    "html5",
+    "javascript"
+  ],
+  "author": "ammarasad2005",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "three": "^0.158.0"
+  }
+}
