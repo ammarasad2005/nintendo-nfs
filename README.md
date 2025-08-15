@@ -56,6 +56,43 @@ npm install
 npm start
 ```
 
+## 🏗️ Build & Deployment
+
+This project includes a comprehensive build and deployment system supporting multiple platforms and environments.
+
+### Quick Build Commands
+```bash
+# Development build
+npm run build:dev
+
+# Production build
+npm run build:prod
+
+# Deploy to staging
+npm run deploy:staging
+
+# Deploy to production
+npm run deploy:production
+```
+
+### Version Management
+```bash
+# Check current version
+npm run version:info
+
+# Bump version and build
+npm run release:patch  # 0.1.0 → 0.1.1
+npm run release:minor  # 0.1.0 → 0.2.0
+npm run release:major  # 0.1.0 → 1.0.0
+```
+
+### Supported Platforms
+- **Web**: Browser-based deployment with optimized assets
+- **Desktop**: Cross-platform desktop application
+- **Mobile**: Mobile app with store-ready packaging
+
+For detailed build and deployment instructions, see [BUILD.md](BUILD.md).
+
 ## 🕹️ How to Play
 1. Select your preferred game mode
 2. Choose your car from the available roster
