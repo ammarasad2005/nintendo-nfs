@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nintendo NFS - Particle System Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        canvas {
+            display: block;
+            border: 1px solid #333;
+        }
+        
+        .controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        
+        .controls button {
+            margin: 2px;
+            padding: 5px 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .controls button:hover {
+            background: #45a049;
+        }
+        
+        .stats {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    
+    <div class="controls">
+        <h3>Nintendo NFS Particle System</h3>
+        <button onclick="toggleDriftSmoke()">Toggle Drift Smoke</button>
+        <button onclick="toggleBoostTrail()">Toggle Boost Trail</button>
+        <button onclick="createCollision()">Collision Sparks</button>
+        <button onclick="clearParticles()">Clear All</button>
+        <br><br>
+        <div>Click and drag to move effects around!</div>
+        <div>Mouse wheel to change intensity</div>
+    </div>
+    
+    <div class="stats" id="stats">
+        Active Particles: 0<br>
+        Available Particles: 1000<br>
+        FPS: 0
+    </div>
+
+    <script src="src/particles/ParticleSystem.js"></script>
+    <script src="src/particles/ParticleEmitter.js"></script>
+    <script src="src/particles/ParticleEffects/DriftSmoke.js"></script>
+    <script src="src/particles/ParticleEffects/BoostTrail.js"></script>
+    <script src="src/particles/ParticleEffects/CollisionSparks.js"></script>
+    
+    <script>
+        // Initialize canvas and context
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        // Initialize particle system
+        const particleSystem = new ParticleSystem(1000);
+        
+        // Initialize effect systems
+        const driftSmoke = new DriftSmoke(particleSystem);
+        const boostTrail = new BoostTrail(particleSystem);
+        const collisionSparks = new CollisionSparks(particleSystem);
+        
+        // Mouse tracking
+        let mouseX = canvas.width / 2;
+        let mouseY = canvas.height / 2;
+        let mouseDown = false;
+        let intensity = 1.0;
+        
+        // Effect states
+        let driftActive = false;
+        let boostActive = false;
+        
+        // FPS tracking
+        let lastTime = 0;
+        let fps = 0;
+        let frameCount = 0;
+        
+        // Mouse event handlers
+        canvas.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        canvas.addEventListener('mousedown', () => {
+            mouseDown = true;
+        });
+        
+        canvas.addEventListener('mouseup', () => {
+            mouseDown = false;
+        });
+        
+        canvas.addEventListener('wheel', (e) => {
+            intensity = Math.max(0.1, Math.min(3.0, intensity + (e.deltaY > 0 ? -0.1 : 0.1)));
+            e.preventDefault();
+        });
+        
+        // Control functions
+        function toggleDriftSmoke() {
+            driftActive = !driftActive;
+            if (driftActive) {
+                driftSmoke.start(mouseX, mouseY, { x: 0, y: 0 }, intensity);
+            } else {
+                driftSmoke.stop();
+            }
+        }
+        
+        function toggleBoostTrail() {
+            boostActive = !boostActive;
+            if (boostActive) {
+                boostTrail.start(mouseX, mouseY, { x: 0, y: 0 }, intensity);
+            } else {
+                boostTrail.stop();
+            }
+        }
+        
+        function createCollision() {
+            const types = ['normal', 'wall', 'car', 'object'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            collisionSparks.createCollision(mouseX, mouseY, 
+                { x: (Math.random() - 0.5) * 100, y: (Math.random() - 0.5) * 100 }, 
+                intensity, type);
+        }
+        
+        function clearParticles() {
+            particleSystem.clear();
+            driftSmoke.stop();
+            boostTrail.stop();
+            driftActive = false;
+            boostActive = false;
+        }
+        
+        // Game loop
+        function gameLoop(currentTime) {
+            const deltaTime = (currentTime - lastTime) / 1000;
+            lastTime = currentTime;
+            
+            // Calculate FPS
+            frameCount++;
+            if (frameCount % 60 === 0) {
+                fps = Math.round(1 / deltaTime);
+            }
+            
+            // Update effects if active
+            if (driftActive) {
+                driftSmoke.update(mouseX, mouseY, { x: 0, y: 0 }, intensity);
+            }
+            
+            if (boostActive) {
+                boostTrail.update(mouseX, mouseY, { x: 50, y: 0 }, intensity);
+            }
+            
+            // Update particle system
+            particleSystem.update(deltaTime);
+            
+            // Clear canvas with Nintendo-style dark background
+            ctx.fillStyle = '#0a0a0a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Render particles
+            particleSystem.render(ctx);
+            
+            // Update stats
+            const stats = particleSystem.getStats();
+            document.getElementById('stats').innerHTML = `
+                Active Particles: ${stats.active}<br>
+                Available Particles: ${stats.available}<br>
+                Intensity: ${intensity.toFixed(1)}<br>
+                FPS: ${fps}
+            `;
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // Start the game loop
+        requestAnimationFrame(gameLoop);
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
