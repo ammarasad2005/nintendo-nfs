@@ -1,0 +1,150 @@
+{
+    "frames": {
+        "idle_0": {
+            "frame": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 100
+        },
+        "move_0": {
+            "frame": { "x": 64, "y": 0, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 100
+        },
+        "move_1": {
+            "frame": { "x": 128, "y": 0, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 100
+        },
+        "move_2": {
+            "frame": { "x": 192, "y": 0, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 100
+        },
+        "move_3": {
+            "frame": { "x": 0, "y": 32, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 100
+        },
+        "turn_left_0": {
+            "frame": { "x": 64, "y": 32, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 100
+        },
+        "turn_left_1": {
+            "frame": { "x": 128, "y": 32, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 100
+        },
+        "turn_left_2": {
+            "frame": { "x": 192, "y": 32, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 100
+        },
+        "turn_right_0": {
+            "frame": { "x": 0, "y": 64, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 100
+        },
+        "turn_right_1": {
+            "frame": { "x": 64, "y": 64, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 100
+        },
+        "turn_right_2": {
+            "frame": { "x": 128, "y": 64, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 100
+        },
+        "boost_0": {
+            "frame": { "x": 192, "y": 64, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 50
+        },
+        "boost_1": {
+            "frame": { "x": 0, "y": 96, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 50
+        },
+        "boost_2": {
+            "frame": { "x": 64, "y": 96, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 50
+        },
+        "boost_3": {
+            "frame": { "x": 128, "y": 96, "w": 64, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 32 },
+            "sourceSize": { "w": 64, "h": 32 },
+            "duration": 50
+        }
+    },
+    "animations": {
+        "idle": {
+            "frames": ["idle_0"]
+        },
+        "moving": {
+            "frames": ["move_0", "move_1", "move_2", "move_3"]
+        },
+        "turning_left": {
+            "frames": ["turn_left_0", "turn_left_1", "turn_left_2"]
+        },
+        "turning_right": {
+            "frames": ["turn_right_0", "turn_right_1", "turn_right_2"]
+        },
+        "boosting": {
+            "frames": ["boost_0", "boost_1", "boost_2", "boost_3"]
+        }
+    },
+    "meta": {
+        "app": "Nintendo NFS Sprite System",
+        "version": "1.0",
+        "image": "sports_car.png",
+        "format": "RGBA8888",
+        "size": { "w": 256, "h": 128 },
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:c8c6e9b4c2e3d4f5a6b7c8d9e0f1a2b3c4d5e6f7$"
+    }
+}

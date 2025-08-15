@@ -1,0 +1,57 @@
+{
+    "frames": {
+        "boost_0": {
+            "frame": { "x": 0, "y": 0, "w": 32, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+            "sourceSize": { "w": 32, "h": 32 },
+            "duration": 80
+        },
+        "boost_1": {
+            "frame": { "x": 32, "y": 0, "w": 32, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+            "sourceSize": { "w": 32, "h": 32 },
+            "duration": 80
+        },
+        "boost_2": {
+            "frame": { "x": 64, "y": 0, "w": 32, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+            "sourceSize": { "w": 32, "h": 32 },
+            "duration": 80
+        },
+        "boost_3": {
+            "frame": { "x": 96, "y": 0, "w": 32, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+            "sourceSize": { "w": 32, "h": 32 },
+            "duration": 80
+        },
+        "boost_4": {
+            "frame": { "x": 0, "y": 32, "w": 32, "h": 32 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+            "sourceSize": { "w": 32, "h": 32 },
+            "duration": 80
+        }
+    },
+    "animations": {
+        "boost": {
+            "frames": ["boost_0", "boost_1", "boost_2", "boost_3", "boost_4"]
+        }
+    },
+    "meta": {
+        "app": "Nintendo NFS Sprite System",
+        "version": "1.0",
+        "image": "boost_effect.png",
+        "format": "RGBA8888",
+        "size": { "w": 128, "h": 64 },
+        "scale": "1"
+    }
+}
